@@ -1,0 +1,16 @@
+[
+    {
+        "source": "{% ubbr %} echo(StringInput('my answer')) {% endubbr %}",
+        "test": "string_grader",
+        "correct": ["my answer"],
+        "incorrect": ["my_answer"],
+        "comments": "tests that the data produced by the Ubbr object produces a correctly functioning StringInputGrader object"
+    },
+    {
+        "source": "{% ubbr %} echo(IntegerInput(9)) {% endubbr %}",
+        "test": "integer_grader",
+        "correct": [9],
+        "incorrect": [10,8]
+    }
+
+]
