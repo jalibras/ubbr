@@ -10,7 +10,7 @@ ubbrnodes
 import re
 
 # imports for the Ubbr source code
-from inputs import StringInput, IntegerInput
+from problems.inputs import StringInput, IntegerInput
 
 
 class UbbrState(object):
