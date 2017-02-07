@@ -16,9 +16,10 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from problems.views import problem_view
+from problems.views import problem_view,problem_grade
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^problem/(\d+)', problem_view),
+    url(r'^grade/(\d+)', problem_grade),
 ]

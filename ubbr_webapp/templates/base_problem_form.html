@@ -1,0 +1,13 @@
+
+
+<form method="post" action="/grade/{{ problem_id }}">
+
+    There should be a token here
+    {% csrf_token %}
+
+    {% block ubbrcontent %}
+    This content will be overwritten with Ubbr generated content
+    {% endblock %}
+
+    <input type = "submit"/>
+</form>

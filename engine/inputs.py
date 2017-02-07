@@ -36,7 +36,7 @@ class StringInput(BaseInput):
 
 
     def get_html(self,input_id):
-        return "<div class='ubbr-input' id='ubbr-input-{}'><input type='text'></input></div>".format(input_id)
+        return "<div class='ubbr-input' id='ubbr-input-{input_id}'><input type='text' name='ubbr-input-{input_id}'></input></div>".format(input_id=input_id)
 
 
 
@@ -55,3 +55,6 @@ class IntegerInput(BaseInput):
                 'answer': self.answer,
                 }
         return r
+
+    def get_html(self,input_id):
+        return "<div class='ubbr-input' id='ubbr-input-{input_id}'><input type='text' name='ubbr-input-{input_id}'></input></div>".format(input_id=input_id)

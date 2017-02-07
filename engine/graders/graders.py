@@ -29,3 +29,14 @@ class IntegerInputGrader(BaseGrader):
             return (True, "")
         else:
             return (False, "") 
+
+
+
+def grader_from_data_type(data_type):
+    if data_type == 'StringInput':
+        return StringInputGrader
+    if data_type == 'IntegerInput':
+        return IntegerInputGrader
+    return False
+
+
