@@ -3,7 +3,7 @@ Instances of Ubbr take a source string
 and generate django/jinja style templates
 together with a list of strings that can be 
 passed to the template as a variable called 
-ubbrnodes
+ubbrvalues
 """
 
 
@@ -59,7 +59,7 @@ class Ubbr(object):
         template +=template_fragments.pop(0)
         counter = 0
         while len(template_fragments)>0:
-            template +="{{ ubbrnodes."+str(counter)+" }}"+template_fragments.pop(0)
+            template +="{{ ubbrvalues."+str(counter)+" }}"+template_fragments.pop(0)
             counter+=1
         return [template,code_fragments]
 
@@ -80,7 +80,7 @@ class Ubbr(object):
         """
 returns a pair (list of strings,list of data) 
 The list of srings tcan be passed to the template
-as a variable named ubbrnodes.
+as a variable named ubbrvalues.
 The data contain information required to 
 grade answers
 """

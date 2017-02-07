@@ -32,7 +32,7 @@ class UbbrTest(TestCase):
         for tc in cases:
             u = Ubbr(tc['source'])
             nodes = u.get_context()[0]
-            self.assertEqual(nodes,tc['output']['ubbrnodes'])
+            self.assertEqual(nodes,tc['output']['ubbrvalues'])
 
    
     def test_random_seed(self):
@@ -50,7 +50,7 @@ class UbbrTest(TestCase):
             u = Ubbr(tc['source'])
             nodes = u.get_context()[0]
             for j in range(len(nodes)):
-                self.assertRegex(nodes[j],tc['output']['ubbrnodes'][j])
+                self.assertRegex(nodes[j],tc['output']['ubbrvalues'][j])
 
     def test_string_grader(self):
         cases = [case for case in self.testcases if case['test']=='stringgrader']

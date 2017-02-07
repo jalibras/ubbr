@@ -4,7 +4,7 @@
         "output": {
             "template": "Hello",
             "code_fragments": [],
-            "ubbrnodes": []
+            "ubbrvalues": []
         },
         "test": "basic",
         "comments": ""
@@ -12,9 +12,9 @@
     {
         "source": "Hello {% ubbr %} a = 1{% endubbr %}",
         "output": {
-            "template": "Hello {{ ubbrnodes.0 }}",
+            "template": "Hello {{ ubbrvalues.0 }}",
             "code_fragments": ["a = 1"],
-            "ubbrnodes": [""]
+            "ubbrvalues": [""]
         },
         "test": "basic",
         "comments": "testing the regexp"
@@ -22,9 +22,9 @@
     {
         "source": "Hello {% ubbr %} a = 1{% endubbr %} world {% ubbr %} a = 1 {% endubbr %}",
         "output": {
-            "template": "Hello {{ ubbrnodes.0 }} world {{ ubbrnodes.1 }}",
+            "template": "Hello {{ ubbrvalues.0 }} world {{ ubbrvalues.1 }}",
             "code_fragments": ["a = 1", "a = 1 "],
-            "ubbrnodes": ["",""]
+            "ubbrvalues": ["",""]
         },
         "test": "basic",
         "comments": "testing the regexp"
@@ -32,9 +32,9 @@
     {
         "source": "Hello {% ubbr %}  a = 1 {% endubbr %} world {% \nubbr \n %} \n \na = 1 \n{%endubbr %}",
         "output": {
-            "template": "Hello {{ ubbrnodes.0 }} world {{ ubbrnodes.1 }}",
+            "template": "Hello {{ ubbrvalues.0 }} world {{ ubbrvalues.1 }}",
             "code_fragments": ["a = 1 ", "a = 1 \n"],
-            "ubbrnodes": ["",""]
+            "ubbrvalues": ["",""]
         },
         "test": "basic",
         "comments": "testing the regexp with newlines in whitespace in the ubb tags"
@@ -42,9 +42,9 @@
     {
         "source": "Hello {% ubbr %} a = 1{% endubbr %} world {% ubbr %} echo(2+2){% endubbr %}",
         "output": {
-            "template": "Hello {{ ubbrnodes.0 }} world {{ ubbrnodes.1 }}",
+            "template": "Hello {{ ubbrvalues.0 }} world {{ ubbrvalues.1 }}",
             "code_fragments": ["a = 1", "echo(2+2)"],
-            "ubbrnodes": ["","4"]
+            "ubbrvalues": ["","4"]
         },
         "test": "basic",
         "comments": "testing echo"
@@ -52,9 +52,9 @@
     {
         "source": "Hello {% ubbr %} a = 1\nb=2{% endubbr %} world",
         "output": {
-            "template": "Hello {{ ubbrnodes.0 }} world",
+            "template": "Hello {{ ubbrvalues.0 }} world",
             "code_fragments": ["a = 1\nb=2"],
-            "ubbrnodes": [""]
+            "ubbrvalues": [""]
         },
         "test": "basic",
         "comments": "newlines in code fragment"
@@ -64,7 +64,7 @@
         "output": {
             "template": "",
             "code_fragments": ["ubbr import random \nrandom.seed(ubbr_state.random_seed) \necho(random.randint(1,100)"],
-            "ubbrnodes": []
+            "ubbrvalues": []
         },
         "test": "random",
         "comments": "random seed"
@@ -72,7 +72,7 @@
     {
         "source": "Hello {% ubbr %} echo(StringInput('a')) {% endubbr %} world {% ubbr %} echo(StringInput('b')) {% endubbr %}",
         "output": {
-            "ubbrnodes": ["ubbr-input-","ubbr-input-"]
+            "ubbrvalues": ["ubbr-input-","ubbr-input-"]
         },
         "test": "input",
         "comments": "testing the basic string input widget"
@@ -80,7 +80,7 @@
     {
         "source": "Hello {% ubbr %} echo(StringInput('a')) {% endubbr %} world",
         "output": {
-            "ubbrnodes": ["ubbr-input-"]
+            "ubbrvalues": ["ubbr-input-"]
         },
         "test": "input",
         "comments": "testing the basic string input widget"
