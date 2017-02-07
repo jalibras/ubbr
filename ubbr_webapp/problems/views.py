@@ -23,11 +23,11 @@ def problem_view(request,id):
     # get the template and context values from the Ubbr
     template_string = ubbr.template
     random_seed=request.GET.get('seed','1')
-    ubbrnodes_value = ubbr.get_context(random_seed=random_seed)[0]
+    ubbrvalues = ubbr.get_context(random_seed=random_seed)[0]
 
     # now some standard django code for rendering a template
     # from a string and a dict of context values
-    context = Context({'ubbrnodes':ubbrnodes_value},autoescape=False)
+    context = Context({'ubbrvalues':ubbrvalues},autoescape=False)
     template = Template(template_string)
     return HttpResponse(template.render(context))
 
