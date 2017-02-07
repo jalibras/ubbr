@@ -1,5 +1,4 @@
 import json
-import uuid
 
 class BaseInput(object):
 
@@ -13,7 +12,9 @@ class BaseInput(object):
         return "<div class='ubbr-input' id='ubbr-input-{}'></div>".format(input_id)
 
 # subclasses must override this methods
-    def data(self,data=None):
+    def data(self,data_id=None):
+# should return a data object for the input 
+# NB. this should be serializable
         pass
 
 
@@ -31,7 +32,11 @@ class StringInput(BaseInput):
                 'data_type': 'StringInput',
                 'answer': self.answer,
                 }
-        return json.dumps(r)
+        return r
+
+
+    def get_html(self,input_id):
+        return "<div class='ubbr-input' id='ubbr-input-{}'><input type='text'></input></div>".format(input_id)
 
 
 
@@ -49,4 +54,4 @@ class IntegerInput(BaseInput):
                 'data_type': 'IntegerInput',
                 'answer': self.answer,
                 }
-        return json.dumps(r)
+        return r

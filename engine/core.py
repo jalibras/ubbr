@@ -10,7 +10,7 @@ ubbrnodes
 import re
 
 # imports for the Ubbr source code
-from problems.inputs import StringInput, IntegerInput
+from ubbr.engine.inputs import StringInput, IntegerInput
 
 
 class UbbrState(object):
@@ -36,9 +36,14 @@ class UbbrState(object):
         return self.data
 
 class Ubbr(object):
-    def __init__(self,source,tag_name='ubbr'):
+    def __init__(self,source=None,tag_name='ubbr',**kwargs):
         self.source = source
         self.tag_name = tag_name
+        self.template,self.code_fragments = self._make() 
+
+    
+
+
 
     def _make(self):
         pattern = r'{%\s*?'+self.tag_name+r'\s*?%}\s*(.*?){%\s*?end'+self.tag_name+r'\s*?%}'
@@ -59,7 +64,8 @@ class Ubbr(object):
         return [template,code_fragments]
 
     def _execute_code(self,random_seed=None,code_fragments=None):
-
+        # returns an instance of UbbrState that results from executing the 
+        # assembled code_fragemants (together with separatos)
         code = "\nubbr_state.echo('_ubbr_separator_')\n".join(code_fragments)
         ubbr_state = UbbrState(random_seed=random_seed)
         # here we inject some function names into the global namespace
@@ -78,10 +84,8 @@ as a variable named ubbrnodes.
 The data contain information required to 
 grade answers
 """
-        if code_fragments:
-            pass
-        else:
-            code_fragments = self._make()[1]
+        if code_fragments==None:
+            code_fragments = self.code_fragments
         if code_fragments==[]:
             return ([],[])
 

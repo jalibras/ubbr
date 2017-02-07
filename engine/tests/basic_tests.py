@@ -1,6 +1,8 @@
 
 from unittest import TestCase
-from core import Ubbr
+from ubbr.engine.core import Ubbr
+
+import os
 
 
 import json
@@ -10,7 +12,8 @@ class UbbrTest(TestCase):
 
 
     def setUp(self):
-        with open('tests/fixtures/testcases.json') as tc_file:
+        fixtures_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),'fixtures')
+        with open(os.path.join(fixtures_path,'testcases.json')) as tc_file:
             self.testcases = json.load(tc_file)
 
 

@@ -3,12 +3,10 @@ import json
 
 
 class BaseGrader(object):
-    def __init__(self,data_string):
-        self.data = json.loads(data_string)
 
-    def grader(self,answer):
+    def grade(self,answer,data):
 # returns a pair (Boolean,Information) where 
-# Information is a json encoded object that 
+# data is an object (dict) that 
 # might contain extra information about the 
 # grade. The Boolean is used for cases where simple 
 # correct/incorrect reporting is appropriate
@@ -16,10 +14,9 @@ class BaseGrader(object):
 
 
 class StringInputGrader(BaseGrader):
-        
 
-    def grade(self,answer):
-        if answer==self.data['answer']:
+    def grade(self,answer,data):
+        if answer==data['answer']:
             return (True, "")
         else:
             return (False, "")
@@ -27,8 +24,8 @@ class StringInputGrader(BaseGrader):
        
 class IntegerInputGrader(BaseGrader):
 
-    def grade(self,answer):
-        if int(answer)==int(self.data['answer']):
+    def grade(self,answer,data):
+        if int(answer)==int(data['answer']):
             return (True, "")
         else:
             return (False, "") 
