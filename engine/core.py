@@ -10,7 +10,7 @@ ubbrvalues
 import re
 
 # imports for the Ubbr source code
-from ubbr.engine.inputs import StringInput, IntegerInput
+from ubbr.engine.inputs import BaseInput,StringInput, IntegerInput
 
 
 class UbbrState(object):
@@ -21,11 +21,13 @@ class UbbrState(object):
     
 
     def echo(self,obj):
-        if hasattr(obj,'data'):
+        if isinstance(obj,BaseInput):
             data_id = len(self.data)
             self.data.append(obj.data(data_id))
             self.out_stream+=obj.get_html(data_id)
             return 
+        if hasattr(obj,'_latex_'):
+            self.out_stream+=obj._latex_()
         self.out_stream+=str(obj)
         return
     
