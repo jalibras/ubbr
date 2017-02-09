@@ -12,6 +12,11 @@ import re
 # imports for the Ubbr source code
 from ubbr.engine.inputs import BaseInput,StringInput, IntegerInput
 
+PATTERNS  = {
+        'template':r'{%\s*?ubbr\s*?%}\s*(.*?){%\s*?endubbr\s*?%}',
+        'xml':r'<ubbr>\s*(.*?)</ubbr>',
+        }
+
 
 class UbbrState(object):
     def __init__(self,random_seed=None):
@@ -38,18 +43,24 @@ class UbbrState(object):
         return self.data
 
 class Ubbr(object):
-    def __init__(self,source=None,tag_name='ubbr',**kwargs):
+    """An instance of this class takes a source
+    string with python code embdded and interpolates the 
+    output of the echo statements in place of the python 
+    code fragments.
+    """
+    def __init__(self,source=None,tag_style='template',**kwargs):
         self.source = source
-        self.tag_name = tag_name
-        self.template,self.code_fragments = self._make() 
+        #self.tag_name = tag_name
+        self.template,self.code_fragments = self._make(tag_style) 
+
 
     
 
 
 
-    def _make(self):
-        pattern = r'{%\s*?'+self.tag_name+r'\s*?%}\s*(.*?){%\s*?end'+self.tag_name+r'\s*?%}'
-        #pattern = r'{%\s*?'+self.tag_name+r'\s*(.*?)%}'
+    def _make(self,tag_style='template'):
+        #pattern = r'{%\s*?'+self.tag_name+r'\s*?%}\s*(.*?){%\s*?end'+self.tag_name+r'\s*?%}'
+        pattern = PATTERNS[tag_style]
         fragment_list = re.split(pattern,self.source,flags=re.DOTALL)
         template_fragments = [fragment_list.pop(0)]
         code_fragments = []

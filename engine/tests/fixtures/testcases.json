@@ -84,5 +84,12 @@
         },
         "test": "input",
         "comments": "testing the basic string input widget"
+    },
+    {
+        "source": "Hello world!<ubbr>a = 10 \necho(a**2)</ubbr> <p> <ubbr>  s = 'a string'\necho(s)</ubbr>",
+        "output": {
+            "ubbrvalues": ["100","a string"]
+        },
+        "test": "xml tags"
     }
 ]

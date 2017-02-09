@@ -52,12 +52,11 @@ class UbbrTest(TestCase):
             for j in range(len(nodes)):
                 self.assertRegex(nodes[j],tc['output']['ubbrvalues'][j])
 
-    def test_string_grader(self):
-        cases = [case for case in self.testcases if case['test']=='stringgrader']
+    def test_xml_style_tags(self):
+        cases = [case for case in self.testcases if case['test']=='xml tags']
         for tc in cases:
-            u = Ubbr(tc['source'])
-            resources = u.get_context()[1]
-            for r in resources:
-                pass
+            u = Ubbr(tc['source'],tag_style='xml')
+            ubbrvalues = u.get_context()[0]
+            self.assertEqual(ubbrvalues,tc['output']['ubbrvalues'])
 
 
