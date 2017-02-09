@@ -8,12 +8,14 @@ be used by problem authors to try out problem code snippets.
 
 To get it up and running on localhost
 
-1. Istall Django for your version of python. It has been tested with Python 3.5 and Django 1.10. It should woWith other versions of Python and Django but YMMV.
+1. Install Django for your version of python. It has been tested with Python 3.5 and Django 1.10. It should woWith other versions of Python and Django but YMMV.
 
-2. Deploy the 
+2. Deploy the application on a test server. In a linux environment, the following shell commands will do that
 
 $ cd ubbr_webapp
+
 $ python manage.py runserver
+
 
 Now open a broswer and go to localhost:8000/admin and you should 
 see the Django admin login page. Login with 
