@@ -2,7 +2,7 @@
 
 ## Setting up the sample web application 
 
-The sample web app is a bar bone Django appliction that is meant 
+The sample web app is a bare bones Django application that is meant 
 to demonstrate some very basic usage patterns. It can also 
 be used by problem authors to try out problem code snippets.
 
