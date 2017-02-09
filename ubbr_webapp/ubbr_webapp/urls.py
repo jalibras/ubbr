@@ -20,6 +20,6 @@ from problems.views import problem_view,problem_grade
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^problem/(\d+)', problem_view),
+    url(r'^problem/(\d+)', problem_view,name='problem'),
     url(r'^grade/(\d+)', problem_grade),
 ]
