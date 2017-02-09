@@ -11,10 +11,10 @@ class BaseInput(object):
     def get_html(self,input_id):
         return "<div class='ubbr-input' id='ubbr-input-{}'></div>".format(input_id)
 
-# subclasses must override this methods
+    # subclasses must override this methods
     def data(self,data_id=None):
-# should return a data object for the input 
-# NB. this should be serializable
+    # should return a data object for the input 
+    # NB. this should be serializable
         pass
 
 
@@ -58,3 +58,7 @@ class IntegerInput(BaseInput):
 
     def get_html(self,input_id):
         return "<div class='ubbr-input' id='ubbr-input-{input_id}'><input type='text' name='ubbr-input-{input_id}'></input></div>".format(input_id=input_id)
+
+
+class DecimalInput(BaseInput):
+    pass
