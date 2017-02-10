@@ -1,10 +1,17 @@
 
 from unittest import TestCase
+import os
+import sys
+
+d = os.path.dirname
+ubbr_location = d(d(d(d(d((os.path.abspath(__file__)))))))
+print(ubbr_location)
+sys.path.append(ubbr_location)
+
 from ubbr.engine.core import Ubbr
 from ubbr.engine.graders.graders import StringInputGrader, IntegerInputGrader
 
 import json
-import os
 
 
 class UbbrTest(TestCase):
@@ -23,9 +30,9 @@ class UbbrTest(TestCase):
             for r in data:
                 grader = StringInputGrader()
                 for answer in tc['correct']:
-                    self.assertEqual(grader.grade(answer,r)[0],True)
+                    self.assertEqual(grader.grade(answer,r)['score'],grader.grade(answer,r)['max_score'])
                 for answer in tc['incorrect']:
-                    self.assertEqual(grader.grade(answer,r)[0],False)
+                    self.assertEqual(grader.grade(answer,r)['score'],int(0))
 
 
 
@@ -38,10 +45,15 @@ class UbbrTest(TestCase):
             for r in data:
                 grader = IntegerInputGrader()
                 for answer in tc['correct']:
-                    self.assertEqual(grader.grade(answer,r)[0],True)
+                    self.assertEqual(grader.grade(answer,r)['score'],grader.grade(answer,r)['max_score'])
                 for answer in tc['incorrect']:
-                    self.assertEqual(grader.grade(answer,r)[0],False)
+                    self.assertEqual(grader.grade(answer,r)['score'],int(0))
 
 
+    def test_decimal_input_precision(self):
+        tcs = [c  for c in self.testcases if c['test']=='DecimalInput Precision']
+        for case in tcs:
+            u = Ubbr(case['source'])
+            
 
 

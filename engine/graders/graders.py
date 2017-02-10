@@ -1,4 +1,5 @@
 
+import decimal
 import json
 
 
@@ -17,18 +18,34 @@ class StringInputGrader(BaseGrader):
 
     def grade(self,answer,data):
         if answer==data['answer']:
-            return (True, "")
+            return {
+                    "score":1,
+                    "max_score":1,
+                    "data":{}
+                    }
         else:
-            return (False, "")
+            return {
+                    "score":0,
+                    "max_score":1,
+                    "data":{}
+                    }
 
        
 class IntegerInputGrader(BaseGrader):
 
     def grade(self,answer,data):
         if int(answer)==int(data['answer']):
-            return (True, "")
+            return {
+                    "score":1,
+                    "max_score":1,
+                    "data":{}
+                    }
         else:
-            return (False, "") 
+            return {
+                    "score":0,
+                    "max_score":1,
+                    "data":{}
+                    }
 
 
 
