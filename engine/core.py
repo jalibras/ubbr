@@ -10,7 +10,7 @@ ubbrvalues
 import re
 
 # imports for the Ubbr source code
-from ubbr.engine.inputs import BaseInput,StringInput, IntegerInput
+from ubbr.engine.inputs import BaseInput,StringInput, IntegerInput, DecimalInput
 
 PATTERNS  = {
         'template':r'{%\s*?ubbr\s*?%}\s*(.*?){%\s*?endubbr\s*?%}',

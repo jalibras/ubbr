@@ -9,7 +9,7 @@ print(ubbr_location)
 sys.path.append(ubbr_location)
 
 from ubbr.engine.core import Ubbr
-from ubbr.engine.graders.graders import StringInputGrader, IntegerInputGrader
+from ubbr.engine.graders.graders import StringInputGrader, IntegerInputGrader, DecimalInputGrader
 
 import json
 
@@ -54,6 +54,18 @@ class UbbrTest(TestCase):
         tcs = [c  for c in self.testcases if c['test']=='DecimalInput Precision']
         for case in tcs:
             u = Ubbr(case['source'])
+            data = u.get_context()[1]
+            for r in data:
+                grader = DecimalInputGrader()
+                for answer in case['correct']:
+                    print(answer,r['answer_string'])
+                    self.assertEqual(grader.grade(answer,r)['score'],grader.grade(answer,r)['max_score'])
+                    print('OK')
+                for answer in case['incorrect']:
+                    print(answer,r['answer_string'])
+                    self.assertEqual(grader.grade(answer,r)['score'],int(0))
+                    print('OK')
+
             
 
 

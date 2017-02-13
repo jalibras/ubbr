@@ -17,6 +17,17 @@
         "source": "{% ubbr %} echo(DecimalInput(float(1/7),prec=4)) {% endubbr %}",
         "incorrect": ["0.143","0.142","0.14295","0.142849"],
         "correct": ["0.14294","0.142949","0.14285"]
+    },
+    {
+        "test": "DecimalInput Precision",
+        "source": "{% ubbr %} echo(DecimalInput(150,prec=1)) {% endubbr %}",
+        "incorrect": ["149"],
+        "correct": ["200"]
+    },
+    {
+        "test": "FAILING - DecimalInput Precision",
+        "source": "{% ubbr %} echo(DecimalInput(1.4,prec=1,rounding='ROUND_UP')) {% endubbr %}",
+        "incorrect": ["1.0","2.1"],
+        "correct": ["2.0","1.1"]
     }
-
 ]

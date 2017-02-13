@@ -1,5 +1,7 @@
 
 import decimal
+from decimal import Decimal
+from decimal import localcontext
 import json
 
 
@@ -48,12 +50,42 @@ class IntegerInputGrader(BaseGrader):
                     }
 
 
+class DecimalInputGrader(BaseGrader):
+    def grade(self,guess,data):
+        with localcontext() as ctx:
+            #ctx.prec = int(data['prec'])
+            ctx.prec = int(data.pop('prec',4))
+            ctx.rounding = data.pop('rounding','ROUND_HALF_UP')
+            guess_as_decimal = Decimal(guess)
+            correct = Decimal(data['answer_string'])
+            if +guess_as_decimal == +correct:
+                return {
+                        "score": 1,
+                        "max_score":1,
+                        "data": {
+                            "rel_error":str(Decimal(0))
+                            }
+                        }
+            else:
+                return {
+                        "score": 0,
+                        "max_score":1,
+                        "data": {
+                            "rel_error":str(abs((guess_as_decimal-correct)/correct))
+                            }
+                        }
+
+        
+
+
 
 def grader_from_data_type(data_type):
     if data_type == 'StringInput':
         return StringInputGrader
     if data_type == 'IntegerInput':
         return IntegerInputGrader
-    return False
+    if data_type == 'DecimalInput':
+        return DecimalInputGrader
+    raise ValueError('Cannot find grader class for input type {}'.format(data_type))
 
 
