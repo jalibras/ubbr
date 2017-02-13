@@ -58,13 +58,13 @@ class UbbrTest(TestCase):
             for r in data:
                 grader = DecimalInputGrader()
                 for answer in case['correct']:
-                    print(answer,r['answer_string'])
+                    #print(answer,r['answer_string'])
                     self.assertEqual(grader.grade(answer,r)['score'],grader.grade(answer,r)['max_score'])
-                    print('OK')
+                    #print('OK')
                 for answer in case['incorrect']:
-                    print(answer,r['answer_string'])
+                    #print(answer,r['answer_string'])
                     self.assertEqual(grader.grade(answer,r)['score'],int(0))
-                    print('OK')
+                    #print('OK')
 
             
 

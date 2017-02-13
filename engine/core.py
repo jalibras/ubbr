@@ -29,6 +29,7 @@ class UbbrState(object):
         if isinstance(obj,BaseInput):
             data_id = len(self.data)
             self.data.append(obj.data(data_id))
+            #print(obj.data(data_id))
             self.out_stream+=obj.get_html(data_id)
             return 
         if hasattr(obj,'_latex_'):

@@ -25,7 +25,7 @@
         "correct": ["200"]
     },
     {
-        "test": "FAILING - DecimalInput Precision",
+        "test": "DecimalInput Precision",
         "source": "{% ubbr %} echo(DecimalInput(1.4,prec=1,rounding='ROUND_UP')) {% endubbr %}",
         "incorrect": ["1.0","2.1"],
         "correct": ["2.0","1.1"]

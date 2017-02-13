@@ -8,11 +8,7 @@ import json
 class BaseGrader(object):
 
     def grade(self,answer,data):
-# returns a pair (Boolean,Information) where 
-# data is an object (dict) that 
-# might contain extra information about the 
-# grade. The Boolean is used for cases where simple 
-# correct/incorrect reporting is appropriate
+        """returns a dict with keys grade, max_grade and data"""
         pass
 
 
@@ -53,9 +49,8 @@ class IntegerInputGrader(BaseGrader):
 class DecimalInputGrader(BaseGrader):
     def grade(self,guess,data):
         with localcontext() as ctx:
-            #ctx.prec = int(data['prec'])
-            ctx.prec = int(data.pop('prec',4))
-            ctx.rounding = data.pop('rounding','ROUND_HALF_UP')
+            ctx.prec = int(data.get('prec',4))
+            ctx.rounding = data.get('rounding','ROUND_HALF_UP')
             guess_as_decimal = Decimal(guess)
             correct = Decimal(data['answer_string'])
             if +guess_as_decimal == +correct:
