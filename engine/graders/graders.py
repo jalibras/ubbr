@@ -47,10 +47,18 @@ class IntegerInputGrader(BaseGrader):
 
 
 class DecimalInputGrader(BaseGrader):
+
+    def __init__(self,default_prec=4,default_rounding='ROUND_HALF_UP'):
+        self.default_prec = default_prec
+        self.default_rounding = default_rounding
+
+
+
+
     def grade(self,guess,data):
         with localcontext() as ctx:
-            ctx.prec = int(data.get('prec',4))
-            ctx.rounding = data.get('rounding','ROUND_HALF_UP')
+            ctx.prec = int(data.get('prec',self.default_prec))
+            ctx.rounding = data.get('rounding',self.default_rounding)
             guess_as_decimal = Decimal(guess)
             correct = Decimal(data['answer_string'])
             if +guess_as_decimal == +correct:
