@@ -65,8 +65,8 @@ class DecimalInput(BaseInput):
     def __init__(self,answer,**kwargs):
         self.answer = Decimal(answer)
         self.answer_string = str(self.answer)
-        self.prec = int(kwargs.pop('prec',4))
-        self.rounding = kwargs.pop('rounding','ROUND_HALF_UP')
+        self.prec = int(kwargs.get('prec',4))
+        self.rounding = kwargs.get('rounding','ROUND_HALF_UP')
         super(DecimalInput,self).__init__(**kwargs)
 
     def data(self,data_id=None):
