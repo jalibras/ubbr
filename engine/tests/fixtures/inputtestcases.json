@@ -1,0 +1,46 @@
+[
+    {
+        "test": "Input",
+        "source": "{% ubbr %} echo(StringInput('abc'))  {% endubbr %}",
+        "output": {
+            "patterns":[".*input.*type=.*text"],
+            "data": [
+                {
+                    "data_type": "StringInput"
+                }
+            ]
+        }
+    },
+    {
+        "test": "Input",
+        "source": "{% ubbr %} echo(IntegerInput(10))  {% endubbr %}",
+        "output": {
+            "patterns":[".*input.*type=.*text"],
+            "data": [
+                {
+                    "data_type": "IntegerInput"
+                }
+            ]
+        }
+    },
+    {
+        "test": "DecimalInput Precision",
+        "source": "{% ubbr %} echo(DecimalInput(float(1/7),prec=4)) {% endubbr %}",
+        "output": {
+            "patterns":[".*input.*type=.*text"],
+            "data": [
+                {
+                    "data_type": "DecimalInput",
+                    "answer": "0.1429"
+                }
+            ]
+        }
+    },
+    {
+        "test": "input-",
+        "source": "{% ubbr %} {% endubbr %}",
+        "output": {
+            "ubbrvalues":[]
+        }
+    }
+]
