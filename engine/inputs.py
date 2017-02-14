@@ -1,5 +1,6 @@
 from decimal import Decimal
 import json
+import random
 
 class BaseInput(object):
 
@@ -80,6 +81,19 @@ class DecimalInput(BaseInput):
                 'rounding':self.rounding
                 }
         return r
+
+
+class MultipleChoiceInput(BaseInput):
+    def __init__(self,choices,correct_index,**kwargs):
+        self.shuffle = kwargs.get('shuffle',True)
+        perm = list(range(len(choices)))
+        if self.shuffle:
+            random.shuffle(perm) 
+        self.choices = [choices[j] for j in perm]
+        self.correct_index = perm.index(correct_index)
+
+    def get_html(self,input_id=None):
+        pass
 
 
 
