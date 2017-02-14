@@ -8,9 +8,11 @@ class BaseInput(object):
         self.kwargs = kwargs
 
 
-
     def get_html(self,input_id):
-        return "<div class='ubbr-input' id='ubbr-input-{}'></div>".format(input_id)
+        return "<div class='ubbr-input' id='ubbr-input-{input_id}'><input type='text' name='ubbr-input-{input_id}'></input></div>".format(input_id=input_id)
+
+
+
 
     # subclasses must override this methods
     def data(self,data_id=None):
@@ -78,15 +80,6 @@ class DecimalInput(BaseInput):
                 'rounding':self.rounding
                 }
         return r
-
-
-
-
-
-    def get_html(self,input_id):
-        return "<div class='ubbr-input' id='ubbr-input-{input_id}'><input type='text' name='ubbr-input-{input_id}'></input></div>".format(input_id=input_id)
-    
-
 
 
 
