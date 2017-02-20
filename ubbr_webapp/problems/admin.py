@@ -4,4 +4,10 @@ from django.contrib import admin
 
 from problems.models import ModelUbbr
 
-admin.site.register(ModelUbbr)
+
+class ModelUbbrAdmin(admin.ModelAdmin):
+    class Meta:
+        model = ModelUbbr
+    list_display = ('__str__','description',)
+
+admin.site.register(ModelUbbr,ModelUbbrAdmin)

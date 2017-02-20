@@ -34,4 +34,10 @@ class UbbrTest(TestCase):
             self.assertRegex(values_output[0],case['output']['patterns'][0])
             self.assertEqual(data_output[0]['data_type'],case['output']['data'][0]['data_type'])
 
+    def test_inputs(self):
+        tcs = [c  for c in self.testcases if c['test']=='multiple choice input']
+        for case in tcs:
+            u = Ubbr(case['source'])
+            html = u.get_context()[0]
+            self.assertRegex(html,case['pattern'])
 

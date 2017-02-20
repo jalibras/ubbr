@@ -42,5 +42,10 @@
         "output": {
             "ubbrvalues":[]
         }
+    },
+    {
+        "test": "multiple choice input",
+        "source": "{% ubbr %}echo(MultipleChoiceInput(['a','b','c'],1)) {% endubbr %}",
+        "pattern": "(.*radio){3}"
     }
 ]
