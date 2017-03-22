@@ -80,6 +80,55 @@ class DecimalInputGrader(BaseGrader):
 
         
 
+class ExpressionInputGrader(BaseGrader):
+
+    def grade(self,guess,data):
+        try:
+            from sage.all import symbolic_expression,var
+        except:
+            raise ImportError('could not import from sage.all')
+        
+        output = {
+                'score':0,
+                'max_score':1,
+                'data':{
+                    'info':'incorrect expression'
+                    }
+                }
+
+        for v in data['variable_names']:
+            var(v)
+
+        try:
+            guess_expression = symbolic_expression(guess)
+        except:
+            output.update({
+                'data':{
+                    'info':'could not convert input into a valid expression'
+                    }
+                })
+            return output
+
+
+        answer = symbolic_expression(data['answer_string'])
+        if data['method']=='identity':
+
+            if (guess_expression - answer).is_zero():
+                output.update({
+                    'score':1,
+                    'data':{}
+
+                    })
+            else:
+                pass
+
+            return output
+        else:
+            raise ValueError('Unknown method in ExpressionInput')
+
+
+
+
 
 
 def grader_from_data_type(data_type):
@@ -89,6 +138,8 @@ def grader_from_data_type(data_type):
         return IntegerInputGrader
     if data_type == 'DecimalInput':
         return DecimalInputGrader
+    if data_type == 'ExpressionInput':
+        return ExpressionInputGrader
     raise ValueError('Cannot find grader class for input type {}'.format(data_type))
 
 

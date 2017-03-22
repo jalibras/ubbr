@@ -1,4 +1,5 @@
 
+import unittest
 from unittest import TestCase
 import os
 import sys
@@ -9,7 +10,8 @@ print(ubbr_location)
 sys.path.append(ubbr_location)
 
 from ubbr.engine.core import Ubbr
-from ubbr.engine.graders.graders import StringInputGrader, IntegerInputGrader, DecimalInputGrader
+from ubbr.engine.graders.graders import StringInputGrader, IntegerInputGrader, DecimalInputGrader, ExpressionInputGrader
+
 
 import json
 
@@ -50,7 +52,7 @@ class UbbrTest(TestCase):
                     self.assertEqual(grader.grade(answer,r)['score'],int(0))
 
 
-    def test_decimal_input_precision(self):
+    def est_decimal_input_precision(self):
         tcs = [c  for c in self.testcases if c['test']=='DecimalInput Precision']
         for case in tcs:
             u = Ubbr(case['source'])
@@ -58,14 +60,47 @@ class UbbrTest(TestCase):
             for r in data:
                 grader = DecimalInputGrader()
                 for answer in case['correct']:
-                    #print(answer,r['answer_string'])
                     self.assertEqual(grader.grade(answer,r)['score'],grader.grade(answer,r)['max_score'])
-                    #print('OK')
                 for answer in case['incorrect']:
-                    #print(answer,r['answer_string'])
                     self.assertEqual(grader.grade(answer,r)['score'],int(0))
-                    #print('OK')
+
+ 
+    def est_sage_expression_input(self):
+        tcs = [c  for c in self.testcases if c['test']=='ExpressionInput']
+        for case in tcs:
+            u = Ubbr(case['source'])
+            data = u.get_context()[1]
+            for r in data:
+                grader = ExpressionInputGrader()
+                for answer in case['correct']:
+                    print(r)
+                    print(answer)
+                    self.assertEqual(grader.grade(answer,r)['score'],grader.grade(answer,r)['max_score'])
+                for answer in case['incorrect']:
+                    print(answer)
+                    self.assertEqual(grader.grade(answer,r)['score'],int(0))
 
             
 
+ 
+    def test_sage_expression_input_grader(self):
+        tcs = [c  for c in self.testcases if c['test']=='ExpressionInputGrader']
+        for case in tcs:
+            data = case['data']
+            grader = ExpressionInputGrader()
+            for answer in case['correct']:
+                print(data)
+                print(answer)
+                self.assertEqual(grader.grade(answer,data)['score'],grader.grade(answer,data)['max_score'])
+            for answer in case['incorrect']:
+                print(answer)
+                self.assertEqual(grader.grade(answer,data)['score'],int(0))
+
+            
+
+
+if __name__=="__main__":
+    unittest.main()
+
+ 
 

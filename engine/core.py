@@ -10,7 +10,7 @@ ubbrvalues
 import re
 
 # imports for the Ubbr source code
-from ubbr.engine.inputs import BaseInput,StringInput, IntegerInput, DecimalInput
+from ubbr.engine.inputs import BaseInput,StringInput, IntegerInput, DecimalInput,ExpressionInput
 
 PATTERNS  = {
         'template':r'{%\s*?ubbr\s*?%}\s*(.*?){%\s*?endubbr\s*?%}',
@@ -19,6 +19,7 @@ PATTERNS  = {
 
 
 class UbbrState(object):
+    """ implements various IO streams for the ubbr code"""
     def __init__(self,random_seed=None):
         self.out_stream=""
         self.random_seed = random_seed
@@ -105,5 +106,6 @@ grade answers
 
         state = self._execute_code(code_fragments=code_fragments,random_seed=random_seed)
         return ((state.get_output()).split('_ubbr_separator_'),state.get_data())
+
 
 

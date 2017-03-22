@@ -47,5 +47,10 @@
         "test": "multiple choice input",
         "source": "{% ubbr %}echo(MultipleChoiceInput(['a','b','c'],1)) {% endubbr %}",
         "pattern": "(.*radio){3}"
+    },
+    {
+        "test": "sage expression input",
+        "source": "{% ubbr %}from sage.all import symbolic_expression,var\nvar('x') \nexpr=symbolic_expression('x^2') \necho(ExpressionInput(expr)){% endubbr %}",
+        "pattern": "input.*type..text"
     }
 ]

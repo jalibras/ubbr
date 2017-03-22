@@ -29,5 +29,22 @@
         "source": "{% ubbr %} echo(DecimalInput(1.4,prec=1,rounding='ROUND_UP')) {% endubbr %}",
         "incorrect": ["1.0","2.1"],
         "correct": ["2.0","1.1"]
+    },
+    {
+        "test": "ExpressionInput",
+        "source": "{% ubbr %}from sage.all import symbolic_expression,var\nvar('x')\ne=symbolic_expression('x^2')\necho(ExpressionInput(e)){% endubbr %}",
+        "correct": ["x^2","x*x"],
+        "incorrect": ["x"]
+    },
+    {
+        "test": "ExpressionInputGrader",
+        "data" : {
+            "answer_string": "x^2",
+            "variable_names": ["x"],
+            "method": "identity"
+        },
+        "correct": ["x^2","x*x"],
+        "incorrect": ["x"]
+
     }
 ]

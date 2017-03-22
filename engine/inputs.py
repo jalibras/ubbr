@@ -97,5 +97,25 @@ class MultipleChoiceInput(BaseInput):
 
 
 
+class ExpressionInput(BaseInput):
+    def __init__(self,expression,**kwargs):
+        self.expression=expression
+        self.method = kwargs.get('method','identity')
+
+    def data(self,data_id=None):
+        variable_names = [str(v) for v in self.expression.variables()]
+        r = {
+                'data_id':data_id,
+                'data_type':"ExpressionInput",
+                'answer_string' :str(self.expression),
+                'variable_names':variable_names,
+                'method':self.method,
+                }
+        return r
+
+
+        
+
+
 
 
