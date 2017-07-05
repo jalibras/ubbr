@@ -45,24 +45,22 @@ class UbbrState(object):
         return self.data
 
 class Ubbr(object):
-    """An instance of this class takes a source
-    string with python code embdded and interpolates the 
-    output of the echo statements in place of the python 
-    code fragments.
+    """Takes a source string with python code embdded and interpolates the output of the echo statements in place of the python code fragments.
     """
-    def __init__(self,source=None,tag_style='template',**kwargs):
+    def __init__(self,source=None,**kwargs):
+        # configure various setting for the Ubbr object from kwargs
+        self.context_variable_name = kwargs.get('context_variable_name','ubbrvalues')
+        self.tag_style=kwargs.get('tag_style','template')
         self.source = source
-        #self.tag_name = tag_name
-        self.template,self.code_fragments = self._make(tag_style) 
+        self.template,self.code_fragments = self._make() 
 
 
     
 
 
 
-    def _make(self,tag_style='template'):
-        #pattern = r'{%\s*?'+self.tag_name+r'\s*?%}\s*(.*?){%\s*?end'+self.tag_name+r'\s*?%}'
-        pattern = PATTERNS[tag_style]
+    def _make(self):
+        pattern = PATTERNS[self.tag_style]
         fragment_list = re.split(pattern,self.source,flags=re.DOTALL)
         template_fragments = [fragment_list.pop(0)]
         code_fragments = []
@@ -74,7 +72,7 @@ class Ubbr(object):
         template +=template_fragments.pop(0)
         counter = 0
         while len(template_fragments)>0:
-            template +="{{ ubbrvalues."+str(counter)+" }}"+template_fragments.pop(0)
+            template +="{{ {var_name}.".format(var_name=self.context_variable_name)+str(counter)+" }}"+template_fragments.pop(0)
             counter+=1
         return [template,code_fragments]
 
@@ -94,7 +92,7 @@ class Ubbr(object):
     def get_context(self,random_seed=None,code_fragments=None):
         """
 returns a pair (list of strings,list of data) 
-The list of srings tcan be passed to the template
+The list of srings can be passed to the template
 as a variable named ubbrvalues.
 The data contain information required to 
 grade answers
